@@ -1,1 +1,1 @@
-# cli-app
+# Spring Shell Application
