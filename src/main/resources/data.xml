@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+    <soap:Header/>
+    <soap:Body>
+        <EventNotificationPayload>
+            <notificationDetails>
+                <applicationID>8d4ae574-a415-4a00-9697-88317097336e</applicationID>
+                <eventNotification_callbackURL>https://localhost/oauth_callback</eventNotification_callbackURL>
+                <userID>2300461625</userID>
+                <recordID>133446317</recordID>
+                <eventNotificationText>Document uploaded</eventNotificationText>
+            </notificationDetails>
+        </EventNotificationPayload>
+    </soap:Body>
+</soap:Envelope>
