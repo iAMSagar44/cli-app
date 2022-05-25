@@ -11,10 +11,6 @@ import java.util.logging.Logger;
 public class ShellApplication {
     private static Logger logger = Logger.getLogger(ShellApplication.class.getName());
 
-    {
-        System.out.println("Welcome to the Shell Application. Please type 'help' for options");
-    }
-
     @ShellMethod(value = "Greet someone.", key = "greet")
     public String remoteGreet(@ShellOption(value = "-s", arity = 2) String [] name){
         logger.log(Level.INFO, String.format("Starting the application::%s", ShellApplication.class.getName()));
