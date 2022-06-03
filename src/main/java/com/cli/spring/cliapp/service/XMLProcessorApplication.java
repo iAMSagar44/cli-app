@@ -56,7 +56,7 @@ public class XMLProcessorApplication {
         if(Files.isRegularFile(filePath)){
             try(BufferedReader reader = Files.newBufferedReader(filePath)){
                 reader.lines().filter(s -> (!(s.startsWith("<?"))))
-                        .forEach(s -> System.out.println(s));
+                        .forEach(System.out::println);
 
 
             } catch (IOException ioe){
@@ -68,7 +68,6 @@ public class XMLProcessorApplication {
                 logger.log(System.Logger.Level.ERROR, "The path provided is a directory. Please provide the absolute path of the file");
             } else {
                 logger.log(System.Logger.Level.ERROR, "File does not exist. Please check the file path.");
-                System.out.println("File does not exist in the path provided");
             }
         }
 
