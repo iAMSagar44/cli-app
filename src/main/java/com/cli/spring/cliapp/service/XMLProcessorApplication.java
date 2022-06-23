@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,9 +23,14 @@ public class XMLProcessorApplication {
     private static final System.Logger logger = System.getLogger(XMLProcessorApplication.class.getName());
 
     @ShellMethod(key = "printFile", value = "Print the contents of the file")
-    public void processXML(@ShellOption(value = "--infile") String filePath){
+    public void processXML(@ShellOption(value = "--infile") String filePath) throws FileNotFoundException {
         Path xmlFile = Path.of(filePath);
-        checkIfFileExists(xmlFile);
+        try {
+            checkIfFileExists(xmlFile);
+        } catch (FileNotFoundException e) {
+            logger.log(System.Logger.Level.INFO, "App closing");
+            throw new FileNotFoundException(e.getMessage());
+        }
 
         DocumentBuilder documentBuilder;
         try {
@@ -51,7 +57,7 @@ public class XMLProcessorApplication {
 
     }
 
-    private void checkIfFileExists(Path filePath) {
+    private void checkIfFileExists(Path filePath) throws FileNotFoundException {
         logger.log(System.Logger.Level.INFO, "Checking if file exists");
         if(Files.isRegularFile(filePath)){
             try(BufferedReader reader = Files.newBufferedReader(filePath)){
@@ -69,6 +75,7 @@ public class XMLProcessorApplication {
             } else {
                 logger.log(System.Logger.Level.ERROR, "File does not exist. Please check the file path.");
             }
+            throw new FileNotFoundException(String.format("File, %s, does not exist", filePath.toUri().getPath()));
         }
 
     }
